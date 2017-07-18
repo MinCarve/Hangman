@@ -117,11 +117,11 @@ int main()
 
 	random_device rd;
 
-	int x = rd() % 10;
+	int x = rd() % 15;
 
 
 	char letters[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-	string WordsToGuess[10] = { "apple", "banana", "orange", "coconut", "donkey", "electricity", "wizard", "knowledge", "successfully", "knob" };
+	string WordsToGuess[15] = { "apple", "banana", "orange", "coconut", "donkey", "electricity", "wizard", "knowledge", "successfully", "knob", "back", "understandable", "free", "uncle", "selection" };
 	string word = WordsToGuess[x];
 
 	char letter;
@@ -146,6 +146,7 @@ int main()
 		cout << endl;
 		if(guesses == 0)
 		{
+			cout << endl << "Hangman is dead :C" << endl;
 			cout << "Game OVER!" << endl;
 
 			Sleep(2500);

@@ -145,7 +145,13 @@ int main()
 		cin >> letter;
 		cout << endl;
 		if(guesses == 0)
+		{
 			cout << "Game OVER!" << endl;
+
+			Sleep(2500);
+			exit(1);
+		}
+
 
 
 

@@ -2,8 +2,12 @@
 #include <iostream>
 #include <string>
 #include <random>
+#include <thread>
+#include <chrono>
 
 using namespace std;
+using std::this_thread::sleep_for;
+using std::chrono::milliseconds;
 
 string top = "_______";
 string rope = "|   |";
@@ -14,6 +18,16 @@ string legs = "|  / \\";
 string bottom = "    |";
 string stand = " _  | __";
 int guesses = 8;
+
+void slow_print(const string& message, unsigned int millis_per_char)
+{
+	for (const char c : message)
+	{
+		cout << c << flush;
+
+		sleep_for(milliseconds(millis_per_char));
+	}
+}
 
 void _top()
 {
@@ -113,6 +127,8 @@ int main()
 	//SetConsoleTitle(_T(GameTitle));
 	system("Color A");
 
+	cout << "(c) Artemy Starikovich Games" << endl << endl;
+
 	cout << "The Game starts." << endl;
 
 	random_device rd;
@@ -136,7 +152,8 @@ int main()
 	{
 		if(guesses != 0)
 		{
-			cout << endl << "Guess a letter" << endl;
+			slow_print("Guess a letter", 30);
+			cout << endl << endl;
 		}
 		if(guesses < 0)
 		{
@@ -146,10 +163,12 @@ int main()
 		cout << endl;
 		if(guesses == 0)
 		{
-			cout << endl << "Hangman is dead :C" << endl;
-			cout << "Game OVER!" << endl;
+			string message = "Hangman is dead :C";
+			slow_print(message, 30);
 
-			Sleep(2500);
+			cout << endl << "Game OVER!" << endl;
+
+			Sleep(5000);
 			exit(1);
 		}
 
@@ -166,11 +185,15 @@ int main()
 				{
 					proc[i] = letter;
 				}
-				cout << "Correct! - " << proc << endl;
+				string correct = "Correct - " + proc;
+				slow_print(correct, 30);
+				cout << endl;
 
 				if(proc == word)
 				{
 					cout << endl << endl << "Congratulations, You won!" << endl << endl;
+					Sleep(5000);
+					exit(1);
 				}
 			}
 		}
@@ -180,7 +203,14 @@ int main()
 			guesses -= 1;
 			if(guesses > 0)
 			{
-				cout << "Incorrect, you now have " << guesses << " guesses left" << endl;
+				if (letter ==  '0' || letter == '1' || letter == '2' || letter == '3' || letter == '4' || letter == '5' || letter == '6' || letter == '7' || letter == '8' || letter == '9')
+				{
+					cout << "Enter a letter, not a number you idiot, you have " << guesses << " guesses left." << endl;
+				}
+				else{
+					cout << "Incorrect, you now have " << guesses << " guesses left" << endl;
+				}
+				
 			}
 			_top();
 			_rope();

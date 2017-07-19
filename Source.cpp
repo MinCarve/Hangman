@@ -18,6 +18,7 @@ string legs = "|  / \\";
 string bottom = "    |";
 string stand = " _  | __";
 int guesses = 8;
+int totalGuesses = 0;
 
 void slow_print(const string& message, unsigned int millis_per_char)
 {
@@ -33,7 +34,7 @@ void _top()
 {
 	if (guesses == 7)
 	{
-		cout << top << endl;
+		cout << top << endl << endl;
 	}
 }
 
@@ -42,7 +43,7 @@ void _rope()
 	if(guesses == 6)
 	{
 		cout << top << endl;
-		cout << rope << endl;
+		cout << rope << endl << endl;
 	}
 }
 
@@ -52,7 +53,7 @@ void _head()
 	{
 		cout << top << endl;
 		cout << rope << endl;
-		cout << head << endl;
+		cout << head << endl << endl;
 	}
 }
 
@@ -63,7 +64,7 @@ void _arms()
 		cout << top << endl;
 		cout << rope << endl;
 		cout << head << endl;
-		cout << arms << endl;
+		cout << arms << endl << endl;
 	}
 }
 
@@ -75,7 +76,7 @@ void _body()
 		cout << rope << endl;
 		cout << head << endl;
 		cout << arms << endl;
-		cout << body << endl;
+		cout << body << endl << endl;
 	}
 }
 
@@ -88,7 +89,7 @@ void _legs()
 		cout << head << endl;
 		cout << arms << endl;
 		cout << body << endl;
-		cout << legs << endl;
+		cout << legs << endl << endl;
 	}
 }
 
@@ -102,7 +103,7 @@ void _bottom()
 		cout << arms << endl;
 		cout << body << endl;
 		cout << legs << endl;
-		cout << bottom << endl;
+		cout << bottom << endl << endl;
 	}
 }
 
@@ -117,7 +118,7 @@ void _stand()
 		cout << body << endl;
 		cout << legs << endl;
 		cout << bottom << endl;
-		cout << stand << endl;
+		cout << stand << endl << endl;
 	}
 }
 
@@ -127,17 +128,22 @@ int main()
 	//SetConsoleTitle(_T(GameTitle));
 	system("Color A");
 
-	cout << "(c) Artemy Starikovich Games" << endl << endl;
+	slow_print("(c) Artemy Starikovich Games", 50);
+	cout << endl << endl;
 
 	cout << "The Game starts." << endl;
 
 	random_device rd;
 
-	int x = rd() % 15;
+	int x = rd() % 26;
 
 
 	char letters[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-	string WordsToGuess[15] = { "apple", "banana", "orange", "coconut", "donkey", "electricity", "wizard", "knowledge", "successfully", "knob", "back", "understandable", "free", "uncle", "selection" };
+
+	string WordsToGuess[26] = { "apple", "banana", "orange", "coconut", "donkey", "electricity", "wizard",
+		"knowledge", "successfully", "knob", "back", "understandable", "free", "uncle", "selection", "bliss",
+		"drag", "draw", "horizon", "supply", "virus", "priority", "mountain", "vertical", "point", "easy" };
+
 	string word = WordsToGuess[x];
 
 	char letter;
@@ -148,32 +154,56 @@ int main()
 			proc[i] = '_';
 		}
 
+		char _guesses[26];
+		int num_guesses = 0;
+
+
 	while(true)
 	{
-		if(guesses != 0)
+		bool already_guessed;
+
+		do 
 		{
-			slow_print("Guess a letter", 30);
-			cout << endl << endl;
+			if(guesses != 0)
+			{
+				already_guessed = false;
+				slow_print("Guess a letter", 30);
+				cout << endl << endl;
+			}
+			if(guesses < 0)
+			{
+				guesses = 0;
+			}
+
+			cin >> letter;
+			cout << endl;
+
+			for (int i = 0; i < num_guesses; i++)
+			{
+				if(_guesses[i] == letter) 
+				{
+					cout << "You already guessed that letter, you idiot!" << endl;
+					already_guessed = true;
+					break;
+				}
+			}
+
+			if(guesses == 0)
+			{
+				string message = "Hangman is dead :C";
+				slow_print(message, 30);												
+
+				cout << endl << "Game OVER!" << endl;
+
+				Sleep(5000);
+				exit(1);
+			}
 		}
-		if(guesses < 0)
-		{
-			guesses = 0;
-		}
-		cin >> letter;
-		cout << endl;
-		if(guesses == 0)
-		{
-			string message = "Hangman is dead :C";
-			slow_print(message, 30);
 
-			cout << endl << "Game OVER!" << endl;
+		while (already_guessed);
 
-			Sleep(5000);
-			exit(1);
-		}
-
-
-
+		_guesses[num_guesses] = letter;
+		num_guesses++;
 
 		bool isInWord = false;
 		for (int i = 0; i < word.length(); i++)
@@ -206,8 +236,7 @@ int main()
 				if (letter ==  '0' || letter == '1' || letter == '2' || letter == '3' || letter == '4' || letter == '5' || letter == '6' || letter == '7' || letter == '8' || letter == '9')
 				{
 					cout << "Enter a letter, not a number you idiot, you have " << guesses << " guesses left." << endl;
-				}
-				else{
+				}else{
 					cout << "Incorrect, you now have " << guesses << " guesses left" << endl;
 				}
 				

@@ -125,7 +125,7 @@ void _stand()
 int main()
 {
 	string GameTitle = "Hangman";
-	//SetConsoleTitle(_T(GameTitle));
+	system("title Hangman - made by Artemy");
 	system("Color A");
 
 	slow_print("(c) Artemy Starikovich Games", 50);
@@ -140,9 +140,10 @@ int main()
 
 	char letters[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
-	string WordsToGuess[26] = { "apple", "banana", "orange", "coconut", "donkey", "electricity", "wizard",
+	string WordsToGuess[32] = { "apple", "banana", "orange", "coconut", "donkey", "electricity", "wizard",
 		"knowledge", "successfully", "knob", "back", "understandable", "free", "uncle", "selection", "bliss",
-		"drag", "draw", "horizon", "supply", "virus", "priority", "mountain", "vertical", "point", "easy" };
+		"drag", "draw", "horizon", "supply", "virus", "priority", "mountain", "vertical", "point", "easy",
+		"spider", "legend", "league", "chain", "particle", "mode"};
 
 	string word = WordsToGuess[x];
 

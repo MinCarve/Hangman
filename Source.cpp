@@ -128,7 +128,7 @@ int main()
 	system("title Hangman - made by Artemy");
 	system("Color A");
 
-	slow_print("(c) Artemy Starikovich Games", 50);
+	slow_print("(c) MinCarve Games", 50);
 	cout << endl << endl;
 
 	cout << "The Game starts." << endl;

@@ -122,7 +122,7 @@ void _stand()
 	}
 }
 
-int main()
+void Entry()
 {
 	string GameTitle = "Hangman";
 	system("title Hangman - made by Artemy");

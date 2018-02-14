@@ -122,10 +122,10 @@ void _stand()
 	}
 }
 
-void Entry()
+int main()
 {
 	string GameTitle = "Hangman";
-	system("title Hangman - made by Artemy");
+	system("title Hangman - made by MinCarve");
 	system("Color A");
 
 	slow_print("(c) MinCarve Games", 50);
